@@ -6,7 +6,6 @@ import (
 	"asg-2/storage/sql"
 	"asg-2/transport/rest"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -30,8 +29,5 @@ func main() {
 
 	// REST
 	router := rest.NewRouter(orderService)
-	log.Println("Starting server on port:", c.AppPort)
-	if err := http.ListenAndServe(":"+c.AppPort, router); err != nil {
-		log.Fatalf("failed to listen and serve: %v", err)
-	}
+	router.Logger.Fatal(router.Start(":" + c.AppPort))
 }

@@ -2,7 +2,6 @@ package rest
 
 import (
 	"asg-2/order"
-	"net/http"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -14,7 +13,7 @@ type BaseResponse struct {
 	Data    interface{} `json:"data"`
 }
 
-func NewRouter(orderService order.OrderService) http.Handler {
+func NewRouter(orderService order.OrderService) *echo.Echo {
 	e := echo.New()
 
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
